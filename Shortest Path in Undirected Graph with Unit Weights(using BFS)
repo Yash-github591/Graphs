@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+#define fast_io     ios_base::sync_with_stdio(0); cin.tie(0);  cout.tie(0);
+#define loop(i,n)   for(i=0; i<n; i++)
+#define ll          long long int
+#define ll_MAX      1e18
+#define ll_MIN      -1e18 
+#define mkp         make_pair
+#define pq          priority_queue
+#define pb(n)       push_back(n)   
+#define dsort(a,n)  sort(a,a+n,greater<int>())
+#define mod         1000000007
+using namespace std;
+int source,n,e;
+vector<int> adj[1000];
+vector<int> dist(1000,1e9);
+void input()
+{
+    int i,u,v;
+    cin>>n>>e;
+    for(i=0; i<e; i++)
+    {
+        cin>>u>>v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+    cin>>source;
+}
+int main() 
+{
+    input();
+    int i,j,c,k;
+    queue<int> qu;
+    qu.push(source);
+    dist[source]=0;
+    while(!qu.empty())
+    {
+        k=qu.front();
+        qu.pop();
+        for(i=0; i<adj[k].size(); i++)
+        {
+            c=adj[k][i];
+            if(dist[c]>dist[k]+1)
+            {
+                dist[c]=dist[k]+1;
+                qu.push(c);
+            }
+        }
+    }
+    for(i=0; i<n; i++)
+    {
+        cout<<dist[i]<<" ";
+    }
+    return 0;
+}
+
+
