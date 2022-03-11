@@ -1,0 +1,30 @@
+int vis[500][500];
+int dr[8]={-1,-1, 0, 1, 1, 1, 0,-1};
+int dc[8]={0,  1, 1, 1, 0,-1,-1,-1};
+bool isvalid(int r,int c,vector<vector<char>> &grid)
+{
+    int n,m;
+    n=grid.size();
+    m=grid[0].size();
+    if(r>=0 && r<n && c>=0 && c<m)
+    {
+        return true;
+    }
+    return false;
+}
+void dfs(int r,int c,vector<vector<char>> &grid)
+{
+    int i,j,k,r2,c2;
+    vis[r][c]=1;
+    for(i=0; i<8; i++)
+    {
+        r2=r+dr[i];
+        c2=c+dc[i];
+        if(isvalid(r2,c2,grid) && !vis[r2][c2] && grid[r2][c2]=='1')
+        {
+            dfs(r2,c2,grid);
+        }
+    }
+}
+
+
